@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block js %}
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<!--codigo-->
+
+<script>
+    function login() {
+        // Your web app's Firebase configuration
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyBWeuHja9vJCYmG8RTfwctB4tWJOfbZT1c",
+            authDomain: "django-pro-56695.firebaseapp.com",
+            projectId: "django-pro-56695",
+            storageBucket: "django-pro-56695.appspot.com",
+            messagingSenderId: "709537351046",
+            appId: "1:709537351046:web:6b12ac185dede062a29807"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        firebase.auth().signInWithPopup(provider).then((result) => {
+            /** @type {firebase.auth.OAuthCredential} */
+            var credential = result.credential;
+
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = credential.idToken;
+            // The signed-in user info.
+            var user = result.user;
+            // recuperar id token user
+
+            user.getIdToken().then(
+                function (idToken) {
+                    var ex = idToken;
+                    console.log(idToken)
+                    axios.post('http://localhost:8000/login', {
+                        data:{
+                            token: 'ex',
+                        }                        
+                    })
+                        .then(function (response) {
+                            console.log(response)
+                        })                
+            }).catch(function (error) {
+            // Handle error
+        })
+
+        //console.log('************************')
+        //token es un objeto, por ende podemos acceder a sus atributos                
+        // funcion para mostrar toquen del usuario -->  user.getIdToken()
+        //console.log(token)
+        //console.log('************************')
+        // ...
+
+
+    }).catch ((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+        console.log('************************')
+        console.log(error)
+        console.log('************************')
+        });
+    }
+</script>
+{% endblock js %}
