@@ -4,6 +4,7 @@ Proyecto Django para la sección de servicios Rest DRF en curso profesional
 crear entorno virtual 
 
 linux| python3 -m venv "nombre entorno"
+
 windows| python -m venv "nombre entorno" Sin comillas
 
 realizar instalacion de required ubicarse sobre carpeta required y ejecutar el comando
