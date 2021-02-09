@@ -9,18 +9,20 @@ windows| python -m venv "nombre entorno" Sin comillas
 
 realizar instalacion de required ubicarse sobre carpeta required y ejecutar el comando
 
-pip install -r local.txt
-
 si se escuentra en OS como linux-ubuntu o deribados, 
 
 modificar psycopg2==2.8.5 --> psycopg2-binary==2.8.5
 
-crear base de datos en postgresql 'agendabd'
+pip install -r local.txt
+
+crear base de datos en postgresql 'agendabd' o revisar secret.json para obtener informacion
 
 realizar migraciones si es necesario
 
 python manage.py makemigrations
 python manage.py migrate
+
+SI EXISTEN PROBLEMAS ELIMINAR MIGRACIONES YA REALIZADAS
 
 crear superusuario para acceder a Django admin
 
